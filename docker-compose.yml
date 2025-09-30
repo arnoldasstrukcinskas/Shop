@@ -1,14 +1,4 @@
 services:
-  shop.server:
-    image: ${DOCKER_REGISTRY-}shopserver
-    build:
-      context: .
-      dockerfile: Shop.Server/Dockerfile
-    environment:
-        - ASPNETCORE_URLS=http://+:8080;
-    ports:
-        - "8080:8080"
-
   shop.client:
     image: node:20-alpine
     container_name: shop.client
@@ -22,3 +12,39 @@ services:
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5042"
     depends_on:
       - shop.server
+
+  shop.server:
+    image: ${DOCKER_REGISTRY-}shopserver
+    build:
+      context: .
+      dockerfile: Shop.Server/Dockerfile
+    environment:
+        - ASPNETCORE_URLS=http://+:8080;
+    ports:
+        - "8080:8080"
+    depends_on:
+      - shop.database
+    healthcheck:
+        test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+
+  shop.database:
+    image: mysql:latest
+    container_name: shop.database
+    restart: no
+    environment:
+       MYSQL_ROOT_PASSWORD: root 
+       MYSQL_DATABASE: shop.db   
+       MYSQL_USER: shop     
+       MYSQL_PASSWORD: root      
+    volumes:
+        - ./.containers/shop:/var/lib/mysql
+    ports:
+        - "3306:3306"
+    healthcheck:
+       test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$MYSQL_ROOT_PASSWORD || exit 1"]
+       interval: 5s
+       timeout: 5s
+       retries: 5
