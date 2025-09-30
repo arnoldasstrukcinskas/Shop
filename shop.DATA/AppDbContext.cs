@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using shop.DATA.Entities;
 
 namespace shop.DATA
 {
@@ -9,6 +10,9 @@ namespace shop.DATA
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
-        { }
+        { 
+        }
+
+        public DbSet<Product> Products { get; set; }
     }
 }
