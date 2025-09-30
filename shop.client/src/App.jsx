@@ -1,27 +1,32 @@
 import React from 'react';
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 
+function PrivateRoute({ children }) {
+    const token = localStorage.getItem("token");
+    return token ? children : <Navigate to="/login" />
+
+}
 
 function App() {
-    const token = localStorage.getItem("token");
-
-
     return (
-        <div>
-            <h1 id="tableLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <PrivateRoute>
+                            <Dashboard />
+                        </PrivateRoute>
+                    }
+                />
+                <Route path="*" element={<Navigate to="/login" />} />
+            </Routes>
+        </Router>
     );
-    
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        if (response.ok) {
-            const data = await response.json();
-            setForecasts(data);
-        }
-    }
 }
 
 export default App;
