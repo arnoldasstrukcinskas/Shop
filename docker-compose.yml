@@ -1,0 +1,24 @@
+services:
+  shop.server:
+    image: ${DOCKER_REGISTRY-}shopserver
+    build:
+      context: .
+      dockerfile: Shop.Server/Dockerfile
+    environment:
+        - ASPNETCORE_URLS=http://+:8080;
+    ports:
+        - "8080:8080"
+
+  shop.client:
+    image: node:20-alpine
+    container_name: shop.client
+    working_dir: /app
+    restart: no
+    ports:
+      - "5042:5042"
+    volumes:
+      - ./shop.client:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5042"
+    depends_on:
+      - shop.server
