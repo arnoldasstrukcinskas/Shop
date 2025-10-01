@@ -24,11 +24,11 @@ namespace Shop.Server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] string username, string password)
+        public async Task<IActionResult> Register([FromBody] UserDto userDto)
         {
             try
             {
-                UserDto userDto = await _userService.Register(username, password);
+                userDto = await _userService.Register(userDto);
                 return Ok(userDto);
             }
             catch (Exception e)
@@ -38,9 +38,9 @@ namespace Shop.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] string username, string password)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            UserDto userDto = await _userService.Login(username, password);
+            UserDto userDto = await _userService.Login(loginDto.Username, loginDto.Password);
             if (userDto == null)
             {
                 return Unauthorized("Invalid username or password!");
@@ -51,7 +51,7 @@ namespace Shop.Server.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Name, loginDto.Username),
                 new Claim(ClaimTypes.Role, "user")
             };
 

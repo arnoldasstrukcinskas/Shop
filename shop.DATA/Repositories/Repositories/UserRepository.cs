@@ -36,10 +36,6 @@ namespace shop.DATA.Repositories.Repositories
             User user = await _dbContext.Users
                 .FirstOrDefaultAsync(u => u.Username.Equals(username));
 
-            if(user == null)
-            {
-                throw new Exception($"User with username: {username} not found");
-            }
 
             return user;
         }

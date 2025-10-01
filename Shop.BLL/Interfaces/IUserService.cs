@@ -10,6 +10,6 @@ namespace Shop.BLL.Interfaces
     public interface IUserService
     {
         Task<UserDto?> Login(string username, string password);
-        Task<UserDto> Register(string username, string password);
+        Task<UserDto> Register(UserDto userDto);
     }
 }

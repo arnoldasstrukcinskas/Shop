@@ -26,7 +26,7 @@ namespace Shop.BLL.Services
             User? user = await _userRepository.GetByUsername(username);
             if (user == null)
             {
-                return null;
+                throw new Exception($"User with username: {username} not found");
             }
 
             string hash = HashPassword(password);
@@ -38,24 +38,28 @@ namespace Shop.BLL.Services
             return new UserDto { Username = user.Username };
         }
 
-        public async Task<UserDto> Register(string username, string password)
+        public async Task<UserDto> Register(UserDto userDto)
         {
-            User user = await _userRepository.GetByUsername(username);
+            User user = await _userRepository.GetByUsername(userDto.Username);
             if(user != null)
             {
-                throw new Exception("User Lready exists");
+                throw new Exception("User already exists");
             }
 
             User newUser = new User
             {
-                Username = username,
-                PasswordHash = HashPassword(password)
+                Username = userDto.Username,
+                PasswordHash = HashPassword(userDto.Password),
+                Name = userDto.Name,
+                Email = userDto.Email,
+                Age = Int32.Parse(userDto.Age)
             };
 
             await _userRepository.AddUser(newUser);
 
-            return new UserDto { Username = user.Username };
+            userDto.Password = "*********";
 
+            return userDto;
         }
 
         private string HashPassword(string password)
