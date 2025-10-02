@@ -50,6 +50,7 @@ namespace Shop.BLL.Services
             {
                 responseProducts.Add(new ProductDto
                 {
+                    Id = product.Id,
                     Name = product.Name,
                     Price = product.Price,
                     Image = product.Image,
@@ -72,6 +73,23 @@ namespace Shop.BLL.Services
             Description = product.Description
             };
             return returnProduct;
+        }
+
+        public async Task<List<ProductDto>> AddListOfProducts(List<ProductDto> productsDto)
+        {
+            try
+            {
+                foreach (var productDto in productsDto)
+                {
+                    await AddProductAsync(productDto);
+                }
+            }
+            catch
+            {
+                throw new Exception("Error: with adding list of products");
+            }
+
+            return productsDto;
         }
     }
 }

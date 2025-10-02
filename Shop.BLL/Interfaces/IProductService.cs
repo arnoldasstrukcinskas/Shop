@@ -12,5 +12,6 @@ namespace Shop.BLL.Interfaces
         Task<ProductDto> AddProductAsync(ProductDto productDto);
         Task<ProductDto> GetProductByName(string name);
         Task<List<ProductDto>> GetAllProducts();
+        Task<List<ProductDto>> AddListOfProducts(List<ProductDto> producstDto);
     }
 }

@@ -28,6 +28,7 @@ function Login() {
 
             const data = await response.json();
             localStorage.setItem("token", data.token);
+            localStorage.setItem("cart", "[]")
             navigate("/dashboard");
         } catch {
             alert("Something went wrong");

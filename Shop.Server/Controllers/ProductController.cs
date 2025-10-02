@@ -21,7 +21,7 @@ namespace Shop.Server.Controllers
         /// Adds product to database
         /// </summary>
         /// <returns>A product object with name, price, image, description</returns>
-        [HttpPost]
+        [HttpPost("addProduct")]
         public async Task<IActionResult> AddProduct(ProductDto productDto)
         {
             if(productDto == null)
@@ -65,6 +65,19 @@ namespace Shop.Server.Controllers
             catch
             {
                 return BadRequest("Something gone wrong");
+            }
+        }
+        [HttpPost("addProducts")]
+        public async Task<IActionResult> AddProducts(List<ProductDto> productsDto)
+        {
+            try
+            {
+                await _productService.AddListOfProducts(productsDto);
+                return Ok(productsDto);
+            }
+            catch
+            {
+                return BadRequest("Controller: Products not added");
             }
         }
     }
