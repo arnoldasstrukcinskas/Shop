@@ -23,6 +23,11 @@ namespace Shop.Server.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Route for registration
+        /// </summary>
+        /// <param name="userDto">User data transfer object containint: username, name, email, age, password.</param>
+        /// <returns>Basic user information without password.</returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDto userDto)
         {
@@ -37,6 +42,11 @@ namespace Shop.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Route for logging in person
+        /// </summary>
+        /// <param name="loginDto">Login data transfer object which contains username and password.</param>
+        /// <returns>Returns JWT bearer token and basic user information.</returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
