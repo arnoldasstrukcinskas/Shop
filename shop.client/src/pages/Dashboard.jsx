@@ -18,7 +18,14 @@ function Dashboard({ manageCart }) {
         setLoading(true);
 
         try {
-            const response = await fetch(`/Product/products?page=${page}&pageSize=20`);
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(`/Product/products?page=${page}&pageSize=20`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
             if (!response.ok) {
                 alert("Failed to get products");
                 return;

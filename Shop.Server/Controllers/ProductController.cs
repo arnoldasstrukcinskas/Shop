@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using shop.DATA.Entities;
 using Shop.BLL.DTO;
 using Shop.BLL.Interfaces;
@@ -40,6 +41,7 @@ namespace Shop.Server.Controllers
             }          
         }
 
+        [Authorize]
         [HttpGet("products")]
         public async Task<IActionResult> GetAllProduts(int page = 1, int pageSize = 20)
         {
@@ -70,6 +72,7 @@ namespace Shop.Server.Controllers
             });
         }
 
+        [Authorize]
         [HttpGet("product")]
         public async Task<IActionResult> GetProductById(int id)
         {
@@ -83,6 +86,7 @@ namespace Shop.Server.Controllers
                 return BadRequest("Something gone wrong");
             }
         }
+
         [HttpPost("addProducts")]
         public async Task<IActionResult> AddProducts(List<ProductDto> productsDto)
         {

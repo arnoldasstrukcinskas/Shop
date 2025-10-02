@@ -14,7 +14,13 @@ function Cart({ totalItems, totalPrice, setTotalItems, setTotalPrice }) {
 
     const getProduct = async (id) => {
         try {
-            const response = await fetch(`/Product/product?id=${id}`)
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(`/Product/product?id=${id}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             const data = await response.json();
             return data;
         }

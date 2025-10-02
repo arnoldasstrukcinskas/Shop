@@ -70,7 +70,7 @@ function App() {
                             </PrivateRoute>
                         }
                     />
-                </Route>
+                    </Route>
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </Router>
