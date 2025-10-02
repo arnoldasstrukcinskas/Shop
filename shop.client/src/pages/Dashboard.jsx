@@ -58,7 +58,7 @@ function Dashboard({ manageCart }) {
     return (
         <div className="dashboard-page">
             <h1>Dashboard</h1>
-
+            <div style={{ gridTemplateColumns: '1fr 1fr' }} className="d-grid gap-2 row-gap-3">
             {products.map((p, index) => (
                 <Card key={`${p.id}-${index}`} sx={{ minWidth: 275, mb: 2 }}>
                     <CardMedia
@@ -72,10 +72,11 @@ function Dashboard({ manageCart }) {
                         <Typography variant="body2">{p.description}</Typography>
                     </CardContent>
                     <CardActions>
-                        <Button onClick={() => manageCart(p)} color="success" size="small">Add To Cart</Button>
+                        <Button variant="contained" onClick={() => manageCart(p)} color="success" size="small">Add To Cart</Button>
                     </CardActions>
                 </Card>
             ))}
+            </div>
 
             {loading && <p>Loading...</p>}
             {!hasMore && <p>No more products</p>}

@@ -25,7 +25,7 @@ services:
         condition: service_healthy 
 
   shop.database:
-    image: mysql:latest
+    image: mysql:8.1
     container_name: shopDB
     restart: no
     environment:

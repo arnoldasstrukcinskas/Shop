@@ -45,7 +45,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 //Get connection string from appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
+var serverVersion = new MySqlServerVersion(new Version(8, 1, 0));
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseMySql(connectionString, serverVersion));

@@ -18,13 +18,20 @@ function App() {
     const [totalItems, setTotalItems] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    const manageCart = async (product) => {
-        setTotalItems(prevTotalItems => prevTotalItems + 1);
-        setTotalPrice(prevPrice => prevPrice + Number(product.price));
-
+    const manageCart = (product) => {
         const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
-        currentCart.push(product.id);
+        const existingItem = currentCart.find(item => item.id === product.id);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            currentCart.push({ id: product.id, quantity: 1 });
+        }
+
         localStorage.setItem("cart", JSON.stringify(currentCart));
+
+        setTotalPrice(prevPrice => prevPrice + Number(product.price));
+        setTotalItems(prevTotalItems => prevTotalItems + 1);
     }
 
     return (

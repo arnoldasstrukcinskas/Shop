@@ -23,6 +23,20 @@ function Cart({ totalItems, totalPrice, setTotalItems, setTotalPrice }) {
         }
     }
 
+    const getQuantity = (id) => {
+        const products = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (products.length === 0) {
+            console.error("Cart: cart is empty");
+        }
+        for (const product of products) {
+            if (product.id === id) {
+                return product.quantity;
+            }
+        }
+        return 0;
+    }
+
     const loadCart = async () => {
         const storedCartIds = JSON.parse(localStorage.getItem("cart")) || [];
         if (storedCartIds.length <= 0) {
@@ -33,33 +47,48 @@ function Cart({ totalItems, totalPrice, setTotalItems, setTotalPrice }) {
 
         const productsArray = [];
 
-        for (const id of storedCartIds) {
-            console.log(id);
+        for (const product of storedCartIds) {
             try {
-                const product = await getProduct(id);
-                if (product) {
-                    productsArray.push(product);
+                const productData = await getProduct(product.id);
+                if (productData) {
+                    productsArray.push(productData);
                 } else {
                     console.error("Cart: no such product");
                 }
             } catch {
-                console.error("Cart: Something wrong with id", id);
+                console.error("Cart: Something wrong with id", product.id);
             }
         }
 
         setProductsCart(productsArray);
     };
 
+    const increaseQuantity = (productData) => {
+        let productsInCart = [];
+        productsInCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        for (const product of productsInCart) {
+            if (product.id === productData.id) {
+                setTotalItems(prevTotalPrice => prevTotalPrice + 1);
+                setTotalPrice(prevTotalPrice => prevTotalPrice + Number(productData.id));
+            }
+        }
+    }
 
     const removeItem = async (p) => {
         let productsInCart = [];
         productsInCart = JSON.parse(localStorage.getItem("cart")) || [];
 
         for (let i = 0; i < productsInCart.length; i++) {
-            if (productsInCart[i] === p.id) {
-                console.log("removing");
-                console.log(productsInCart[i]);
-                productsInCart.splice(i, 1);
+            if (productsInCart[i].id === p.id) {
+
+                productsInCart[i].quantity -= 1;
+
+                if (productsInCart[i].quantity <= 0) {
+
+                    productsInCart.splice(i, 1);
+
+                }
                 break;
             }
         }
@@ -92,10 +121,11 @@ function Cart({ totalItems, totalPrice, setTotalItems, setTotalPrice }) {
                     <CardContent>
                         <Typography variant="h5">{p.name}</Typography>
                         <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>{p.price}</Typography>
-                        <Typography variant="body2">Quantity</Typography>
+                        <Typography variant="body2"><strong>{getQuantity(p.id)}</strong></Typography>
                     </CardContent>
                     <CardActions>
-                        <Button onClick={() => removeItem(p)} color="error" size="small">Remove</Button>
+                        <Button variant="contained" onClick={() => removeItem(p)} color="error" size="small">Remove</Button>
+                        <Button variant="contained" onClick={() => increaseQuantity(p)} color="success" size="small">Add 1 item</Button>
                     </CardActions>
                 </Card>
             ))}
