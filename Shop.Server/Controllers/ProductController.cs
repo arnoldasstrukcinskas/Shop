@@ -41,19 +41,35 @@ namespace Shop.Server.Controllers
         }
 
         [HttpGet("products")]
-        public async Task<IActionResult> GetAllProduts()
+        public async Task<IActionResult> GetAllProduts(int page = 1, int pageSize = 20)
         {
-            try
+            List<ProductDto> products = await _productService.GetAllProducts();
+            
+            if (products == null)
             {
-                List<ProductDto> products = await _productService.GetAllProducts();
-                return Ok(products);
-            } 
-            catch
-            {
-                return BadRequest("Something went wrong");
+                throw new Exception("Controller: Failed to get products");
             }
 
+            int totalItems = products.Count();
+
+            List<ProductDto> responseList = products
+                .OrderBy(product => product.Name)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            int totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+
+            return Ok(new
+            {
+                Page = page,
+                PageSize = pageSize,
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                Data = responseList
+            });
         }
+
         [HttpGet("product")]
         public async Task<IActionResult> GetProductByName(string name)
         {

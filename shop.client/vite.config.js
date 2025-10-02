@@ -11,6 +11,11 @@ export default defineConfig({
                 target: 'http://shop.server:8080', // container name + HTTP
                 changeOrigin: true,
                 secure: false
+            },
+            '/Product': {
+                target: 'http://shop.server:8080', // container name + HTTP
+                changeOrigin: true,
+                secure: false
             }
         }
     }
