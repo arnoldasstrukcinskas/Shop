@@ -69,8 +69,12 @@ function Cart({ totalItems, totalPrice, setTotalItems, setTotalPrice }) {
 
         for (const product of productsInCart) {
             if (product.id === productData.id) {
-                setTotalItems(prevTotalPrice => prevTotalPrice + 1);
-                setTotalPrice(prevTotalPrice => prevTotalPrice + Number(productData.id));
+                product.quantity += 1;
+
+                setTotalItems(prevTotalItems => prevTotalItems + 1);
+                setTotalPrice(prevTotalPrice => prevTotalPrice + Number(productData.price));
+                localStorage.setItem("cart", JSON.stringify(productsInCart));
+                break;
             }
         }
     }

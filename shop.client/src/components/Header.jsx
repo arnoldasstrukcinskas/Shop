@@ -19,7 +19,7 @@ function Header({totalItems}) {
     }
 
     return (
-        <div>
+        <div className="sticky-bottom">
         <nav className="bg-light border navbar navbar-expand-lg navbar-light">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/"><span className="text-primary">S</span><span className="text-danger">H</span><span className="text-warning">O</span><span className="text-success">P</span> <span className="text-danger">API</span></a>
@@ -28,7 +28,7 @@ function Header({totalItems}) {
                 </button>
                 <div className="collapse navbar-collapse" id="navbar">
                     <ul className="navbar-nav me-auto mt-2">
-                        <li className="nav-item"><Link className="nav-link" to="/quote">Profile</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link></li>
                         <li className="nav-item mx-1">
                                 <Button onClick={cartClick}>

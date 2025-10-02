@@ -65,7 +65,19 @@ namespace Shop.Server.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var jwt = tokenHandler.WriteToken(token);
 
-            return Ok(new { token = jwt });
+            return Ok(new { 
+                token = jwt,
+                user = new
+                {
+                    user = new
+                    {
+                        userDto.Username,
+                        userDto.Name,
+                        userDto.Email,
+                        userDto.Age
+                    }
+                }
+                });
         }
     }
 }

@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header'
 import Cart from './pages/Cart';
+import Profile from './pages/Profile'
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
@@ -45,6 +46,14 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Dashboard manageCart={manageCart} />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/profile"
+                        element={
+                            <PrivateRoute>
+                                <Profile />
                             </PrivateRoute>
                         }
                     />

@@ -27,9 +27,11 @@ function Login() {
             }
 
             const data = await response.json();
+            const user = JSON.stringify(data.user);
             localStorage.setItem("token", data.token);
-            localStorage.setItem("cart", "[]")
-            navigate("/dashboard");
+            localStorage.setItem("cart", "[]");
+            localStorage.setItem("user", user);
+            navigate("/profile");
             alert("Welcome back!");
         } catch {
             alert("Something went wrong");

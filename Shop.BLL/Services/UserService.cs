@@ -35,7 +35,11 @@ namespace Shop.BLL.Services
                 throw new Exception("Wrong password!");
             }
 
-            return new UserDto { Username = user.Username };
+            return new UserDto {
+                Username = user.Username,
+                Name = user.Name,
+                Age = user.Age.ToString(),
+                Email = user.Email};
         }
 
         public async Task<UserDto> Register(UserDto userDto)
