@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header'
+import Cart from './pages/Cart';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
@@ -37,6 +38,19 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Dashboard manageCart={manageCart} />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/cart"
+                        element={
+                            <PrivateRoute>
+                                <Cart
+                                    totalItems={totalItems}
+                                    totalPrice={totalPrice}
+                                    setTotalItems={setTotalItems}
+                                    setTotalPrice={setTotalPrice}
+                                />
                             </PrivateRoute>
                         }
                     />

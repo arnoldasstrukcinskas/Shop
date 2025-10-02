@@ -10,7 +10,7 @@ namespace Shop.BLL.Interfaces
     public interface IProductService
     {
         Task<ProductDto> AddProductAsync(ProductDto productDto);
-        Task<ProductDto> GetProductByName(string name);
+        Task<ProductDto> GetProductById(int id);
         Task<List<ProductDto>> GetAllProducts();
         Task<List<ProductDto>> AddListOfProducts(List<ProductDto> producstDto);
     }

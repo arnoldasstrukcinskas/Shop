@@ -10,7 +10,7 @@ namespace shop.DATA.Repositories.Interfaces
     public interface IProductRepository
     {
         Task<Product> AddProductAsync(Product product);
-        Task<Product> GetProductByName(string name);
+        Task<Product> GetProductById(int id);
         Task<List<Product>> GetAllProducts();
     }
 }

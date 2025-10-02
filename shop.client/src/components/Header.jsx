@@ -13,6 +13,11 @@ function Header({totalItems}) {
 
         navigate("/login");
     }
+
+    const cartClick = async () => {
+        navigate("/cart");
+    }
+
     return (
         <div>
         <nav className="bg-light border navbar navbar-expand-lg navbar-light">
@@ -24,12 +29,13 @@ function Header({totalItems}) {
                 <div className="collapse navbar-collapse" id="navbar">
                     <ul className="navbar-nav me-auto mt-2">
                         <li className="nav-item"><Link className="nav-link" to="/quote">Profile</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/buy">Buy</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/sell">Sell</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/history">History</Link></li>
-                        <li className="nav-item mx-3"><ShoppingCartIcon color="primary" /></li>
-                        <li className="nav-item mx-3"><span className="fw-bold">{ totalItems }</span></li>
-
+                        <li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link></li>
+                        <li className="nav-item mx-1">
+                                <Button onClick={cartClick}>
+                                <ShoppingCartIcon color="primary" />
+                                <span className="fw-bold">{totalItems}</span>
+                            </Button>
+                        </li>
                     </ul>
                     <ul className="navbar-nav ms-auto mt-2">
                             <li className="nav-item"><Button variant="outlined" color="error" onClick={logout}>Log Out</Button></li>

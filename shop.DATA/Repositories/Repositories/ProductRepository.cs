@@ -25,9 +25,9 @@ namespace shop.DATA.Repositories.Repositories
             return product;
         }
 
-        public async Task<Product> GetProductByName(string name)
+        public async Task<Product> GetProductById(int id)
         {
-            Product product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Name.Equals(name));
+            Product product = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
 
             return product;
         }

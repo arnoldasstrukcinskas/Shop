@@ -71,11 +71,11 @@ namespace Shop.Server.Controllers
         }
 
         [HttpGet("product")]
-        public async Task<IActionResult> GetProductByName(string name)
+        public async Task<IActionResult> GetProductById(int id)
         {
             try
             {
-                ProductDto product = await _productService.GetProductByName(name);
+                ProductDto product = await _productService.GetProductById(id);
                 return Ok(product);
             }
             catch

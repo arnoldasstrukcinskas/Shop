@@ -62,11 +62,12 @@ namespace Shop.BLL.Services
 
         }
 
-        public async Task<ProductDto> GetProductByName(string name)
+        public async Task<ProductDto> GetProductById(int id)
         {
-            Product product = await _productRepository.GetProductByName(name);
+            Product product = await _productRepository.GetProductById(id);
 
             ProductDto returnProduct = new ProductDto {
+            Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Image = product.Image,
