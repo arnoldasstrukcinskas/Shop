@@ -9,7 +9,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const registerClick = () => {
+    const registerClick = async () => {
         navigate("/register");
     }
 
