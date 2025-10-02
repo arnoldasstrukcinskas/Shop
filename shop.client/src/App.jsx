@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -14,17 +14,29 @@ function PrivateRoute({ children }) {
 }
 
 function App() {
+    const [totalItems, setTotalItems] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const manageCart = async (product) => {
+        setTotalItems(prevTotalItems => prevTotalItems + 1);
+        setTotalPrice(prevPrice => prevPrice + Number(product.price));
+
+        const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+        currentCart.push(product.id);
+        localStorage.setItem("cart", JSON.stringify(currentCart));
+    }
+
     return (
         <Router>
             <Routes>
                 <Route path="/register" element={<Register/> }/>
                 <Route path="/login" element={<Login />} />
-                <Route element={<Header />}>
+                <Route element={<Header totalItems={totalItems} totalPrice={totalPrice} />}>
                     <Route
                         path="/dashboard"
                         element={
                             <PrivateRoute>
-                                <Dashboard />
+                                <Dashboard manageCart={manageCart} />
                             </PrivateRoute>
                         }
                     />

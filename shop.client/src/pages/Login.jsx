@@ -30,6 +30,7 @@ function Login() {
             localStorage.setItem("token", data.token);
             localStorage.setItem("cart", "[]")
             navigate("/dashboard");
+            alert("Welcome back!");
         } catch {
             alert("Something went wrong");
         }

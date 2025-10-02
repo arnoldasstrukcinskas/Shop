@@ -2,8 +2,9 @@ import React from "react";
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-function Header() {
+function Header({totalItems}) {
     const navigate = useNavigate();
 
     const logout = async () => {
@@ -26,6 +27,9 @@ function Header() {
                         <li className="nav-item"><Link className="nav-link" to="/buy">Buy</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/sell">Sell</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/history">History</Link></li>
+                        <li className="nav-item mx-3"><ShoppingCartIcon color="primary" /></li>
+                        <li className="nav-item mx-3"><span className="fw-bold">{ totalItems }</span></li>
+
                     </ul>
                     <ul className="navbar-nav ms-auto mt-2">
                             <li className="nav-item"><Button variant="outlined" color="error" onClick={logout}>Log Out</Button></li>

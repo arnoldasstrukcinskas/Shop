@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-function Dashboard() {
+function Dashboard({ manageCart }) {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
@@ -36,7 +36,7 @@ function Dashboard() {
         setLoading(false);
     }
 
-    // Runs fetchProduct upon page change.
+     // Runs fetchProduct upon page change.
     useEffect(() => {
         manageProducts();
     }, [page]);
@@ -72,7 +72,7 @@ function Dashboard() {
                         <Typography variant="body2">{p.description}</Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small">Learn More</Button>
+                        <Button onClick={() => manageCart(p)} color="success" size="small">Add To Cart</Button>
                     </CardActions>
                 </Card>
             ))}
