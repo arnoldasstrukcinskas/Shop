@@ -40,7 +40,7 @@ function App() {
             <Routes>
                 <Route path="/register" element={<Register/> }/>
                 <Route path="/login" element={<Login />} />
-                <Route element={<Header totalItems={totalItems} totalPrice={totalPrice} />}>
+                <Route element={<Header totalItems={totalItems} setTotalItems={setTotalItems} setTotalPrice={setTotalPrice} />}>
                     <Route
                         path="/dashboard"
                         element={

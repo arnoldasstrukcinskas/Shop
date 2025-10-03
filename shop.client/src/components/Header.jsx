@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-function Header({totalItems}) {
+function Header({ totalItems, setTotalItems, setTotalPrice}) {
     const navigate = useNavigate();
 
     const logout = async () => {
         localStorage.removeItem("token");
         localStorage.removeItem("cart");
+        setTotalItems(0);
+        setTotalPrice(0);
 
         navigate("/login");
     }
