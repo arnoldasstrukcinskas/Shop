@@ -35,7 +35,7 @@ services:
        MYSQL_PASSWORD: root      
     volumes:
         - ./.containers/shop:/var/lib/mysql
-        - ./shopdb_dump.sql:/docker-entrypoint-initdb.d/shopdb_dump.sql
+        - ./Shop.Server/database/shopdb_dump.sql:/docker-entrypoint-initdb.d/shopdb_dump.sql
     ports:
         - "3306:3306"
     healthcheck:

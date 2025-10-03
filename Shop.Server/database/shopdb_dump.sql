@@ -1,4 +1,3 @@
-mysqldump: [Warning] Using a password on the command line interface can be insecure.
 -- MySQL dump 10.13  Distrib 8.1.0, for Linux (x86_64)
 --
 -- Host: localhost    Database: shopdb
@@ -82,7 +81,7 @@ CREATE TABLE `Users` (
   `Age` int NOT NULL,
   `PasswordHash` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +90,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'string','string','string',0,'RzKH+CmNunFjqJeQiVj3wOrnM+JdLgJ5kuou3JvtL6g='),(2,'arnoldas','string','string',0,'RzKH+CmNunFjqJeQiVj3wOrnM+JdLgJ5kuou3JvtL6g='),(3,'arnoldass','string','string',0,'RzKH+CmNunFjqJeQiVj3wOrnM+JdLgJ5kuou3JvtL6g='),(4,'arnoldasss','string','string',0,'RzKH+CmNunFjqJeQiVj3wOrnM+JdLgJ5kuou3JvtL6g='),(5,'bubis','string','string',0,'RzKH+CmNunFjqJeQiVj3wOrnM+JdLgJ5kuou3JvtL6g='),(6,'stringg','string','string',0,'RzKH+CmNunFjqJeQiVj3wOrnM+JdLgJ5kuou3JvtL6g='),(7,'gugis','gugis','gugis',62,'ZE0GGKmXWWfRTC5pRRhwAMemVT44+SzZUEvUNlbenFY=');
+INSERT INTO `Users` VALUES (8,'user','Example_User','Example.User@gmail.com',30,'BPiZbadjt6lpsQKO4wB1aerzpjVIbdqyEdUSyFud+Ps='),(9,'example','Tom','tom.example@gmail.com',35,'UNhY4JhezH9gQYqvDMWrWH9CwlcKiECVqejMrND2VFw=');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-02 17:46:09
+-- Dump completed on 2025-10-03  8:46:36
