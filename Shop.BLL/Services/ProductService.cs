@@ -76,6 +76,7 @@ namespace Shop.BLL.Services
             return returnProduct;
         }
 
+        //Only for testing
         public async Task<List<ProductDto>> AddListOfProducts(List<ProductDto> productsDto)
         {
             try
